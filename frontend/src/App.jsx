@@ -17,7 +17,7 @@ function App() {
     setUserInfo(user)
   }
   
-  const globalState = { updateUser,userInfo }
+  const globalState = { updateUser, userInfo }
 
   return (
     <MovieContext.Provider value={globalState}>
