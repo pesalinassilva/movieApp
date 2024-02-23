@@ -73,7 +73,6 @@ app.get('/profile', verifyToken, async (req, res) => {
         if (!usuario) {
             return res.status(404).json({ message: "Usuario no encontrado" });
         }
-        console.log(req.id)
         res.status(200).json(usuario);
     } catch (error) {
         console.error("Error en el endpoint GET /profile:", error);

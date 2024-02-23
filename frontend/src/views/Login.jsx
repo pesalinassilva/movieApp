@@ -1,15 +1,15 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ENDPOINT } from '../config/constants.js'
-//import MovieContext from '../context/MovieContext'
+import MovieContext from '../context/MovieContext'
 
 const initialForm = { email: 'docente@desafiolatam.com', password: '123456' }
 
 const Login = () => {
     const navigate = useNavigate()
     const [user, setUser] = useState(initialForm)
-    //const { setUserInfo } = useContext(MovieContext)
+    const { updateUserState } = useContext(MovieContext)
 
     const handleUser = (event) => setUser({ ...user, [event.target.name]: event.target.value })
 
@@ -20,7 +20,7 @@ const Login = () => {
             .then(({ data }) => {
                 window.sessionStorage.setItem('token', data)
                 window.alert('Usuario identificado con éxito 😀.')
-                //setUserInfo({})
+                updateUserState({})
                 navigate('/profile')
             })
             .catch(({ response: { data } }) => {

@@ -23,17 +23,20 @@ const Home = () => {
     }, [])
 
     return(
-        <>
-            {movies.map((movie,index) => (
-                <CardInfo
-                    key={index}
-                    image={movie.poster_path} 
-                    name={movie.title}
-                    release_date={movie.release_date}
-                    rate={movie.vote_average}
-                />
-            ))}      
-        </>
+        <div className="container">
+            <h1>Top Rated Movies</h1>
+            <div className="row gap-5">
+                {movies.map((movie,index) => (
+                    <CardInfo
+                        key={index}
+                        image={movie.poster_path} 
+                        name={movie.title}
+                        release_date={movie.release_date}
+                        rate={movie.vote_average}
+                    />
+                ))}      
+            </div>
+        </div>
     )
 }
 

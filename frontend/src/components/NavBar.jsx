@@ -5,10 +5,10 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
     const navigate = useNavigate()
-    const { updateUser, userInfo } = useContext(MovieContext)
+    const { updateUserState, userInfo } = useContext(MovieContext)
     
     const logout = () => {
-        updateUser()
+        updateUserState()
         window.sessionStorage.removeItem('token')
         navigate('/home')
         console.log('Sesión cerrada')
@@ -20,6 +20,9 @@ const NavBar = () => {
             <>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul className="navbar-nav">
+                        <li>
+                            <Link to='/search' className='btn register-btn'>Buscar</Link>
+                        </li>
                         <li className="nav-item">
                             <Link to='/signin' className='btn register-btn'>Registrarse</Link>
                         </li>
@@ -38,6 +41,8 @@ const NavBar = () => {
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <Link to='/profile' className='btn m-1 register-btn'>Perfil</Link>
+                            <Link to='/favorites' className='btn m-1 register-btn'>Favoritos</Link>
+                            <Link to='/search' className='btn m-1 register-btn'>Buscar</Link>
                             <button onClick={logout} className='btn btn-danger'>Salir</button>
                         </li>
                     </ul>

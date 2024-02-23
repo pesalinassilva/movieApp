@@ -7,17 +7,21 @@ import NavBar from './components/NavBar';
 import Signin from './views/Signin';
 import Login from './views/Login';
 import Profile from './views/Profile';
+import ContentDetail from './views/ContentDetails';
+import Favorites from './views/Favorites';
+import SearchResults from './views/SearchResults';
+ContentDetail
 
 
 //import './App.css'
 
 function App() {
   const [userInfo, setUserInfo ] = useState(null)
-  const updateUser = (user) => {
+  const updateUserState = (user) => {
     setUserInfo(user)
   }
   
-  const globalState = { updateUser, userInfo }
+  const globalState = { updateUserState, userInfo }
 
   return (
     <MovieContext.Provider value={globalState}>
@@ -28,6 +32,9 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signin' element={<Signin/>}/>
           <Route path='/profile' element={<Profile/>}/>
+          <Route path='/detail' element={<ContentDetail/>}/>
+          <Route path='/search' element={<SearchResults/>}/>
+          <Route path='/favorites' element={<Favorites/>}/>
         </Routes>
       </BrowserRouter>
     </MovieContext.Provider>
