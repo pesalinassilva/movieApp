@@ -5,16 +5,15 @@ import CardInfo from "../components/CardInfo";
 
 //import MovieContext from "../context/MovieContext";
 
-
 const Home = () => {
     const [movies, setMovies] = useState([])
     
     const getMovieData = async () => {
         try {
-            const response = await axios.get(ENDPOINT.home);
+            const response = await axios.get(ENDPOINT.home)
             setMovies(response.data);
         } catch (error) {
-            console.error("Error fetching movie data:", error);
+            console.error("Error fetching movie data:", error)
         }
     }
     

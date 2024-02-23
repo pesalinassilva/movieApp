@@ -94,7 +94,7 @@ app.get('/favorites', verifyToken, async(req, res) => {
 //Buscar pelicula o serie según nombre en la api
 app.get('/search', async(req, res) => {
     try {
-        const { search } = req.body
+        const { search } = req.query
         const searchResult = await searchMoviesAndSeries(search)
         res.json(searchResult)
     } catch (error) {
