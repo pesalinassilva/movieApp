@@ -92,7 +92,6 @@ const showFavorites = async(id) => {
 const searchMoviesAndSeries = async(name) => {
     let nameQuery = name.replace(/ /g, "+")
     const response = await axios.get(`${apiURL}/search/multi?query=${nameQuery}&api_key=cf08696c1d908dffc3b1a61b81eacbaa`)
-    console.log(response.data.results.length)
     return response.data.results
 }
 

@@ -27,20 +27,14 @@ const SearchResults = () => {
                     return (
                         <CardInfo
                             key={index}
-                            image={result.poster_path} 
-                            name={result.title}
-                            release_date={result.release_date}
-                            rate={result.vote_average}
+                            info={result}
                         />
                     )
                 } else if (result.first_air_date) {
                     return (
                         <CardInfo
                             key={index}
-                            image={result.poster_path} 
-                            name={result.title}
-                            release_date={result.first_air_date}
-                            rate={result.vote_average}
+                            info={result}
                         />
                     )
                 }

@@ -20,9 +20,15 @@ function App() {
   const updateUserState = (user) => {
     setUserInfo(user)
   }
-  
-  const globalState = { updateUserState, userInfo }
 
+  const [favorites, setFavorites] = useState(null)
+  const handleFavorites = (favorites) => {
+    setFavorites(favorites)
+  }
+  
+  const globalState = { updateUserState, userInfo, handleFavorites, favorites }
+
+  console.log(favorites)
   return (
     <MovieContext.Provider value={globalState}>
       <BrowserRouter>
