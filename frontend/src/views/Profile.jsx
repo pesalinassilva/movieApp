@@ -12,7 +12,7 @@ const Profile = () => {
         const token = window.sessionStorage.getItem('token')
         axios.get(ENDPOINT.profile, { headers: { Authorization: `Bearer ${token}` } })
         .then(({ data }) => {
-            updateUserState({ ...data })
+            updateUserState(data)
         })
         .catch((error) => {
             console.error(error);

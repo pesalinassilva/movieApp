@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { ENDPOINT } from '../config/constants.js'
 import MovieContext from '../context/MovieContext'
 
-const initialForm = { email: 'docente@desafiolatam.com', password: '123456' }
+const initialForm = { email: '', password: '' }
 
 const Login = () => {
     const navigate = useNavigate()
@@ -13,20 +13,24 @@ const Login = () => {
 
     const handleUser = (event) => setUser({ ...user, [event.target.name]: event.target.value })
 
-    const handleForm = (event) => {
+    const handleForm = async(event) => {
         event.preventDefault()
-    
-        axios.post(ENDPOINT.login, user)
-            .then(({ data }) => {
-                window.sessionStorage.setItem('token', data)
-                window.alert('Usuario identificado con éxito 😀.')
-                updateUserState({})
-                navigate('/profile')
-            })
-            .catch(({ response: { data } }) => {
-                console.error(data)
-                window.alert(`${data.message} 🙁.`)
-            })
+        try {
+            const response = await axios.post(ENDPOINT.login, user)
+            const { data } = response;
+            window.sessionStorage.setItem('token', data)
+            window.alert('Usuario identificado con éxito')
+            updateUserState({})
+            navigate('/profile')
+        } catch (error) {
+            console.error('Error en la solicitud:', error)
+            if (error.response) {
+                const errorMessage = error.response.data.message
+                window.alert(`${errorMessage}`)
+            } else {
+                window.alert('Ocurrió un error al procesar la solicitud')
+            }
+        }
     }
 
     return(

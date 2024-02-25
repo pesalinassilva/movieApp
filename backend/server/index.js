@@ -81,10 +81,10 @@ app.get('/profile', verifyToken, async (req, res) => {
 })
 
 //Mostrar peliculas del listado fav. NO ESTA LISTA 
-app.get('/favorites', verifyToken, async(req, res) => {
+app.post('/favorites', async(req, res) => {
     try {
-        const usuario = await userData(req.email)
-        const fav = await showFavorites(usuario.id)
+        const { id } = req.body
+        const fav = await showFavorites(id)
         res.json(fav)
     } catch (error) {
         res.status(500).send(error.message)

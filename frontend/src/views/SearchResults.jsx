@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { ENDPOINT } from '../config/constants'
-import CardInfo from '../components/CardInfo'
+import SearchCard from '../components/SearchCard'
+
 
 const SearchResults = () => {
-    //const navigate = useNavigate()
     const [search, setSearch] = useState('')
     const [searchResults, setSearchResults] = useState(null)
 
@@ -12,6 +12,7 @@ const SearchResults = () => {
     
     const getSearchResults = async (event) => {
         event.preventDefault()
+        setSearchResults(null)
         try {
             const response = await axios.get(`${ENDPOINT.search}?search=${search}`)
             setSearchResults(response.data)
@@ -22,29 +23,17 @@ const SearchResults = () => {
 
     const displaySearchResults = () => {
         if (searchResults) {
-            return searchResults.map((result, index) => {
-                if (result.release_date) {
-                    return (
-                        <CardInfo
-                            key={index}
-                            info={result}
-                        />
-                    )
-                } else if (result.first_air_date) {
-                    return (
-                        <CardInfo
-                            key={index}
-                            info={result}
-                        />
-                    )
-                }
-                return null
-            })
+            return searchResults.map((result, index) => (
+                <SearchCard 
+                    info={result}
+                    key={index}
+                />
+            ))
+        }else{
+            return(
+                <h1>Aca apareceran tus resultados B)</h1>
+            )
         }
-
-        return(
-            <h1>Aca apareceran tus resultados B)</h1>
-        )
     }
 
     return(

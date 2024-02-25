@@ -2,7 +2,7 @@ const axios = require('axios')
 const { Pool } = require('pg')
 const bcrypt = require('bcryptjs')
 require('dotenv').config()
-const { BBDD } = require('../config/constants.js')
+const { BBDD, APIINFO } = require('../config/constants.js')
 
 const pool = new Pool ({
     host: BBDD.host,
@@ -12,10 +12,8 @@ const pool = new Pool ({
     allowExitOnIdle: true
 })
 
-const apiURL = 'https://api.themoviedb.org/3'
-
 const showMovies = async() => {
-    const response = await axios.get(`${apiURL}/movie/top_rated?page=01&api_key=cf08696c1d908dffc3b1a61b81eacbaa`)
+    const response = await axios.get(`${APIINFO.urlBase}/movie/top_rated?page=01&api_key=${APIINFO.key}`)
     return response.data.results
 }
 
@@ -46,15 +44,17 @@ const logInUser = async (email, password) => {
 //ver perfil de usuario
 const userData = async (email) => {
     try {
-        const consulta = "SELECT * FROM users WHERE email = $1";
-        const values = [email];
-        const { rows, rowCount } = await pool.query(consulta, values)
-        if (rowCount === 0) {
+        const consulta = "SELECT * FROM users WHERE email = $1"
+        const { rows:rowUser, rowCount: userCount } = await pool.query(consulta, [email])
+        if (userCount === 0) {
             throw { code: 404, message: "Usuario no encontrado" }
         }
-        return rows[0];
+        const user = rowUser[0]
+        const getFavoritesFromUser = "SELECT id_user_liked, content_id, content_type FROM movies_and_series_by_user WHERE id_user_liked = $1"
+        const { rows:rowFavorites } = await pool.query(getFavoritesFromUser, [user.id])
+        return {user, favorites: rowFavorites}
     } catch (error) {
-        throw error;
+        throw error
     }
 }
 
@@ -76,13 +76,13 @@ const deleteFromFavorites = async(content, user) => {
 //listar peliculas y series favoritas
 const showFavorites = async(id) => {
     try {
-        const consulta = "SELECT * FROM series_by_user WHERE id = $1"
+        const consulta = "SELECT * FROM movies_and_series_by_user WHERE id_user_liked = $1"
         const values = [id]
         const { rows, rowCount } = await pool.query(consulta, values)
         if (rowCount === 0) {
             throw { code: 404, message: "Usuario no tiene series favoritas :c" }
         }
-        return rows[0];
+        return rows;
     } catch (error) {
         throw error;
     }
@@ -91,26 +91,16 @@ const showFavorites = async(id) => {
 //buscar peliculas y series
 const searchMoviesAndSeries = async(name) => {
     let nameQuery = name.replace(/ /g, "+")
-    const response = await axios.get(`${apiURL}/search/multi?query=${nameQuery}&api_key=cf08696c1d908dffc3b1a61b81eacbaa`)
+    const response = await axios.get(`${APIINFO.urlBase}/search/multi?query=${nameQuery}&api_key=${APIINFO.key}`)
     return response.data.results
 }
 
 //registrar en tabla SQL.
 const saveToFavorites = async(content) => {
-    let { id, name, overview, poster_path, media_type } = content
-    if (media_type === 'movie'){
-        let { release_date } = content
-        const values = [id, name, overview, poster_path, release_date]
-        const consulta = "INSERT INTO movies_by_user values (DEFAULT, 1, $1, $2, $3, $4, $5)"
-        console.log(values)
-        await pool.query(consulta,values)
-    } else if(media_type === 'tv'){
-        let { first_air_date } = content
-        const values = [id, name, overview, poster_path, first_air_date]
-        const consulta = "INSERT INTO series_by_user values (DEFAULT, 1, $1, $2, $3, $4, $5)"
-        console.log(values)
-        await pool.query(consulta,values)
-    }
+    let { user_id, content_id, name, overview, poster_path, media_type, release_date } = content
+    const values = [ user_id, content_id, media_type, name, overview, poster_path, release_date]
+    const consulta = "INSERT INTO movies_and_series_by_user values (DEFAULT, $1, $2, $3, $4, $5, $6, $7)"
+    await pool.query(consulta,values)
 }
 
 //Editar usuario
