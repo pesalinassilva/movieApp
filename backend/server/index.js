@@ -103,7 +103,7 @@ app.get('/search', async(req, res) => {
 })
 
 //registrar peliculas en la DDBB
-app.post('/search', async(req, res) => { 
+app.post('/save_favorites', async(req, res) => { 
     try {
         const content = req.body
         await saveToFavorites(content)

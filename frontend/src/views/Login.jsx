@@ -9,7 +9,7 @@ const initialForm = { email: '', password: '' }
 const Login = () => {
     const navigate = useNavigate()
     const [user, setUser] = useState(initialForm)
-    const { updateUserState } = useContext(MovieContext)
+    const { setUserInfo } = useContext(MovieContext)
 
     const handleUser = (event) => setUser({ ...user, [event.target.name]: event.target.value })
 
@@ -20,7 +20,7 @@ const Login = () => {
             const { data } = response;
             window.sessionStorage.setItem('token', data)
             window.alert('Usuario identificado con éxito')
-            updateUserState({})
+            setUserInfo({})
             navigate('/profile')
         } catch (error) {
             console.error('Error en la solicitud:', error)
