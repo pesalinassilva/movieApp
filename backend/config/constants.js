@@ -5,4 +5,9 @@ const BBDD = {
     database: process.env.PG_DATABASE
 }
 
-module.exports = { BBDD }
+const APIINFO = {
+    key: 'cf08696c1d908dffc3b1a61b81eacbaa',
+    urlBase: 'https://api.themoviedb.org/3'
+}
+
+module.exports = { BBDD, APIINFO }

@@ -11,7 +11,6 @@ const NavBar = () => {
         updateUserState()
         window.sessionStorage.removeItem('token')
         navigate('/home')
-        console.log('Sesión cerrada')
     }
     
     const isLogin = () => {
