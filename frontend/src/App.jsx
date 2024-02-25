@@ -10,18 +10,14 @@ import Profile from './views/Profile';
 import ContentDetail from './views/ContentDetails';
 import Favorites from './views/Favorites';
 import SearchResults from './views/SearchResults';
-ContentDetail
 
 
 //import './App.css'
 
 function App() {
   const [userInfo, setUserInfo ] = useState(null)
-  const updateUserState = (user) => {
-    setUserInfo(user)
-  }
-  console.log(userInfo)
-  const globalState = { updateUserState, userInfo }
+
+  const globalState = { setUserInfo, userInfo }
 
   return (
     <MovieContext.Provider value={globalState}>

@@ -5,10 +5,10 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
     const navigate = useNavigate()
-    const { updateUserState, userInfo } = useContext(MovieContext)
+    const { setUserInfo, userInfo } = useContext(MovieContext)
     
     const logout = () => {
-        updateUserState()
+        setUserInfo()
         window.sessionStorage.removeItem('token')
         navigate('/home')
     }

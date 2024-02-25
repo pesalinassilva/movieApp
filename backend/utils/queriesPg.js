@@ -98,8 +98,8 @@ const searchMoviesAndSeries = async(name) => {
 //registrar en tabla SQL.
 const saveToFavorites = async(content) => {
     let { user_id, content_id, name, overview, poster_path, media_type, release_date } = content
-    const values = [ user_id, content_id, media_type, name, overview, poster_path, release_date]
-    const consulta = "INSERT INTO movies_and_series_by_user values (DEFAULT, $1, $2, $3, $4, $5, $6, $7)"
+    const values = [ user_id, content_id, media_type, name, poster_path, release_date]
+    const consulta = "INSERT INTO movies_and_series_by_user values (DEFAULT, $1, $2, $3, $4, $5, $6)"
     await pool.query(consulta,values)
 }
 

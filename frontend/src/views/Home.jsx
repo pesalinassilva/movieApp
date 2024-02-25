@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ENDPOINT } from "../config/constants"
 import { useContext, useEffect, useState } from "react";
-import CardInfo from "../components/CardInfo";
 import MovieContext from "../context/MovieContext";
+import ContentCard from '../components/ContentCard'
 
 const Home = () => {
     const [movies, setMovies] = useState([])
@@ -21,9 +21,10 @@ const Home = () => {
         getMovieData()
     }, [])
     
-    const favoritesByUser  = userInfo ? userInfo.favorites : []
+    const favoritesByUser = userInfo ? userInfo.favorites : []
     const userTvShows = favoritesByUser.filter(item => item.content_type === "tv").map(item => item.content_id)
     const userMovies = favoritesByUser.filter(item => item.content_type === "movie").map(item => item.content_id)
+    
     return(
         <div className="container">
             <h1>Top Rated Movies</h1>
@@ -31,9 +32,9 @@ const Home = () => {
                 {movies.map((movie,index) => {
                     const isFavorite = userInfo ? (movies.content_type === "tv" ? userTvShows.includes(movie.id) : userMovies.includes(movie.id)) : null
                     return (                
-                        <CardInfo
+                        <ContentCard
                             key={index}
-                            info={movie}
+                            contentInfo={movie}
                             isFavorite={isFavorite}
                         />
                     )

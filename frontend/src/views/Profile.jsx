@@ -6,18 +6,18 @@ import { ENDPOINT } from '../config/constants.js'
 
 const Profile = () => {
     const navigate = useNavigate()
-    const { updateUserState, userInfo } = useContext(MovieContext)
+    const { setUserInfo, userInfo } = useContext(MovieContext)
     
     const getUserInfo = () => {
         const token = window.sessionStorage.getItem('token')
         axios.get(ENDPOINT.profile, { headers: { Authorization: `Bearer ${token}` } })
         .then(({ data }) => {
-            updateUserState(data)
+            setUserInfo(data)
         })
         .catch((error) => {
             console.error(error);
             window.sessionStorage.removeItem('token');
-            updateUserState(null);
+            setUserInfo(null);
             navigate('/home');
         });
     }

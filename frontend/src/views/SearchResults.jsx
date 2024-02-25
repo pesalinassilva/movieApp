@@ -1,10 +1,12 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { ENDPOINT } from '../config/constants'
-import SearchCard from '../components/SearchCard'
 
+import MovieContext from "../context/MovieContext"
+import ContentCard from '../components/ContentCard'
 
 const SearchResults = () => {
+    const { userInfo } = useContext(MovieContext)
     const [search, setSearch] = useState('')
     const [searchResults, setSearchResults] = useState(null)
 
@@ -12,7 +14,6 @@ const SearchResults = () => {
     
     const getSearchResults = async (event) => {
         event.preventDefault()
-        setSearchResults(null)
         try {
             const response = await axios.get(`${ENDPOINT.search}?search=${search}`)
             setSearchResults(response.data)
@@ -20,21 +21,10 @@ const SearchResults = () => {
             console.error("Error searching in movie data:", error.message)
         }
     }
-
-    const displaySearchResults = () => {
-        if (searchResults) {
-            return searchResults.map((result, index) => (
-                <SearchCard 
-                    info={result}
-                    key={index}
-                />
-            ))
-        }else{
-            return(
-                <h1>Aca apareceran tus resultados B)</h1>
-            )
-        }
-    }
+    
+    const favoritesByUser = userInfo ? userInfo.favorites : []
+    const userTvShows = favoritesByUser.filter(item => item.content_type === "tv").map(item => item.content_id)
+    const userMovies = favoritesByUser.filter(item => item.content_type === "movie").map(item => item.content_id)
 
     return(
         <div>
@@ -54,7 +44,21 @@ const SearchResults = () => {
             </form>
             <div className="container">
                 <div className="row gap-5">
-                    {displaySearchResults()}
+                {searchResults ? (
+                    searchResults.map((result, index) => {
+                        const isFavorite = userInfo ? (result.content_type === "tv" ? userTvShows.includes(result.id) : userMovies.includes(result.id)) : null;
+                        return (
+                            <ContentCard
+                                key={index}
+                                contentInfo={result}
+                                isFavorite={isFavorite}
+                            />
+                        );
+                    })
+                    ) : (
+                        <h1>Aca apareceran tus resultados B)</h1>
+                    )
+                }
                 </div>
             </div>
         </div>
