@@ -1,14 +1,19 @@
 import axios from "axios"
 import { ENDPOINT, URLPOSTER } from "../config/constants"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import MovieContext from "../context/MovieContext"
-import { useContext } from "react"
+import { useContext, useState } from "react"
+import ContentDetail from "./ContentDetails"
 
 const ContentCard = ( {contentInfo, isFavorite = null} ) => {
     const navigate = useNavigate()
     const { userInfo } = useContext(MovieContext)
     const user = userInfo ? userInfo.user : null;
     const isMovie = () => (contentInfo.media_type === 'movie' || !contentInfo.media_type )? true : false
+
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     /*const getUserInfo = () => {
         const token = window.sessionStorage.getItem('token')
@@ -57,9 +62,14 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
                 <h5 className="card-title">{contentInfo.name}</h5>
                 <p className="card-text">{contentInfo.release_date}</p>
                 <p className="card-text"><small>{contentInfo.vote_average}</small></p>
-                <Link to='/detail' className='btn btn-primary register-btn'>Detalles</Link>
+                <button onClick={handleShow} className="btn btn-outline-secondary" type="button" id="button-addon2">Ver Detalles</button>
                 <button onClick={saveFavContent} className="btn btn-outline-secondary" type="button" id="button-addon2">{isFavorite ? "Quitar de Favoritos" : "Agregar a favorito "}</button>
             </div>
+            <ContentDetail 
+                show={show}
+                handleClose={handleClose}
+                content={contentInfo}
+            />
         </div>
     )
 }
