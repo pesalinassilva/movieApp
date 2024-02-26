@@ -7,7 +7,6 @@ import NavBar from './components/NavBar';
 import Signin from './views/Signin';
 import Login from './views/Login';
 import Profile from './views/Profile';
-import ContentDetail from './views/ContentDetails';
 import Favorites from './views/Favorites';
 import SearchResults from './views/SearchResults';
 
@@ -28,7 +27,6 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signin' element={<Signin/>}/>
           <Route path='/profile' element={<Profile/>}/>
-          <Route path='/detail' element={<ContentDetail/>}/>
           <Route path='/search' element={<SearchResults/>}/>
           <Route path='/favorites' element={<Favorites/>}/>
         </Routes>

@@ -4,7 +4,7 @@ const app = express()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 
-const { showMovies, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites } = require('../utils/queriesPg.js')
+const { showMovies, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, getContentDetails } = require('../utils/queriesPg.js')
 
 app.listen(3000, console.log("SERVER ON"))
 app.use(cors())
@@ -114,12 +114,22 @@ app.post('/save_favorites', async(req, res) => {
 })
 
 //endpoint para delete.
-app.delete('/favorites', verifyToken, async(req, res) => {
+app.delete('/delete_from_favorites', verifyToken, async(req, res) => {
     try {
         const user = await showUser(req.email)
         const content = req.body
         await deleteFromFavorites(content, user)
         res.json('Contenido eliminado de los favoritos')
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+})
+
+app.post('/content_details', async(req, res) => {
+    try {
+        const content = req.body 
+        const contentDetails = await getContentDetails(content)
+        res.json(contentDetails)
     } catch (error) {
         res.status(500).send(error.message)
     }

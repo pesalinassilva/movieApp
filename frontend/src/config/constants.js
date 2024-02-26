@@ -10,5 +10,5 @@ export const ENDPOINT = {
     favorites: `${URLBASE}/favorites`,
     search: `${URLBASE}/search`,
     saveFavorites: `${URLBASE}/save_favorites`,
-    details: `${URLBASE}/details/:id`
+    details: `${URLBASE}/content_details`
 }

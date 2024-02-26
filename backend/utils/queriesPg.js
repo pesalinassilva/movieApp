@@ -103,10 +103,19 @@ const saveToFavorites = async(content) => {
     await pool.query(consulta,values)
 }
 
+//Detalles de peliculas o series
+const getContentDetails = async(content) =>{
+    let { content_id, media_type } = content
+    const responseContent = await axios.get(`${APIINFO.urlBase}/${media_type}/${content_id}?api_key=${APIINFO.key}`)
+    const responseCrew = await axios.get(`${APIINFO.urlBase}/${media_type}/${content_id}/credits?api_key=${APIINFO.key}`)
+    const response = [responseContent.data, responseCrew.data]
+    return response
+} 
+
 //Editar usuario
 const editUser = async() => {
 
 }
 
 
-module.exports = { showMovies, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, editUser }
+module.exports = { showMovies, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, editUser, getContentDetails }
