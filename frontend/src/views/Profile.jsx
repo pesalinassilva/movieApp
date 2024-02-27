@@ -1,7 +1,7 @@
 import axios from 'axios'
 import MovieContext from '../context/MovieContext.js'
 import { useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ENDPOINT } from '../config/constants.js'
 
 const Profile = () => {
@@ -15,23 +15,26 @@ const Profile = () => {
             setUserInfo(data)
         })
         .catch((error) => {
-            console.error(error);
+            console.error(error)
             window.sessionStorage.removeItem('token');
-            setUserInfo(null);
-            navigate('/home');
-        });
+            setUserInfo(null)
+            navigate('/home')
+        })
     }
 
     useEffect(getUserInfo, [])
 
     return (
-        <div className='py-5'>
-            <h1>
-                Bienvenido <span className='fw-bold'>{userInfo?.user_name}</span>
-            </h1>
-            <h3>
-                {userInfo?.email}
-            </h3>
+        <div className='d-flex justify-content-center flex-column'>
+            <div className="card text-center" style={{width: "100vw"}}>
+                <div className="card-body">
+                    <h1 className="card-title">Bienvenido <span className='fw-bold'>{userInfo?.user?.user_name}</span></h1>
+                    <h6 className="card-subtitle mb-2 text-body-secondary">Aca podrás modificar tu información de usuario</h6>
+                    <h5 className="card-text">usuario: {userInfo?.user?.user_name}</h5>
+                    <h5 className="card-text">correo: {userInfo?.user?.email}</h5>
+                    <Link to='/favorites' className='btn btn-info'>Ir a mis favoritos</Link>
+                </div>
+            </div>
         </div>
     )
 }

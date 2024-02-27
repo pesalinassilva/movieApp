@@ -1,8 +1,9 @@
 import axios from "axios"
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+import Badge from 'react-bootstrap/Badge'
 import { ENDPOINT, URLPOSTER } from "../config/constants"
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 const ContentDetail = ({ show, handleClose, content}) => {
     const [contentDetails, setContentDetails] = useState(null)
@@ -21,7 +22,6 @@ const ContentDetail = ({ show, handleClose, content}) => {
         } catch (error) {
             console.log(error.message);
         }
-
     }
 
     useEffect(() => {
@@ -32,12 +32,12 @@ const ContentDetail = ({ show, handleClose, content}) => {
 
     return(
         <>
-            <Modal show={show} onHide={handleClose} style={{width: '90vw'}}>
+            <Modal show={show} onHide={handleClose} fullscreen={true}>
                 <Modal.Header closeButton>
                     <Modal.Title>{contentDetails?.title ? contentDetails?.title : contentDetails?.name}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ maxWidth: '100%' }}>
-                    <div className="card mb-3" style={{maxWidth: '540px'}}>
+                <Modal.Body>
+                    <div className="card mb-3">
                         <div className="row g-0">
                             <div className="col-md-4">
                                 <img src={`${URLPOSTER}${contentDetails?.poster_path}`} className="img-fluid rounded-start" alt="..." />
@@ -45,17 +45,13 @@ const ContentDetail = ({ show, handleClose, content}) => {
                             <div className="col-md-8">
                             <div className="card-body">
                                 <small className="card-text">{`${contentDetails?.overview}`} <br/></small>
-                                {contentDetails?.genres.map((genre) => (<small key={genre.id}>{genre.name}<br/></small>))}
-                                <small>{`Calificaciones: ${contentDetails?.vote_average}/10`}</small>
+                                <br/>{contentDetails?.genres.map((genre) => (<Badge key={genre.id} bg="secondary">{genre.name}</Badge>))}
+                                <small><br/>{`Calificaciones: ${contentDetails?.vote_average}/10`}</small>
                                 <p className="card-text"><small className="text-body-secondary">{`Fecha de lanzamiento: ${contentDetails?.release_date ? contentDetails?.release_date : contentDetails?.first_air_date}`}</small></p>
-                                <p>Reparto</p>
-                                <ul>
-                                    {crewDetails?.cast.map((actor) => (<li key={actor.id}>{actor.name}</li>))}
-                                </ul>
-                                <p>Produccion</p>
-                                <ul>
-                                    {crewDetails?.crew.map((member) => (<li key={member.id}>{member.name}</li>))}
-                                </ul>
+                                <p><br/>Reparto</p>
+                                {crewDetails?.cast.map((actor, index) => (<small key={index}>{actor.name}, </small>))}
+                                <p><br/>Produccion</p>
+                                {crewDetails?.crew.map((member, index) => (<small key={index}>{member.name},</small>))}
                             </div>
                             </div>
                         </div>

@@ -3,6 +3,7 @@ import { ENDPOINT } from "../config/constants"
 import { useContext, useEffect, useState } from "react";
 import MovieContext from "../context/MovieContext";
 import ContentCard from '../components/ContentCard'
+import PaginationContent from "../components/PaginationContent";
 
 const Home = () => {
     const [movies, setMovies] = useState([])
@@ -20,7 +21,7 @@ const Home = () => {
     useEffect(() => {
         getMovieData()
     }, [])
-    
+
     const favoritesByUser = userInfo ? userInfo.favorites : []
     const userTvShows = favoritesByUser.filter(item => item.content_type === "tv").map(item => item.content_id)
     const userMovies = favoritesByUser.filter(item => item.content_type === "movie").map(item => item.content_id)
@@ -40,6 +41,9 @@ const Home = () => {
                     )
                 })}      
             </div>
+            <PaginationContent
+                
+            />
         </div>
     )
 }

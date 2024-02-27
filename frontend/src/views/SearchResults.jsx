@@ -21,6 +21,8 @@ const SearchResults = () => {
             console.error("Error searching in movie data:", error.message)
         }
     }
+
+    console.log(userInfo)
     
     const favoritesByUser = userInfo ? userInfo.favorites : []
     const userTvShows = favoritesByUser.filter(item => item.content_type === "tv").map(item => item.content_id)
@@ -46,7 +48,7 @@ const SearchResults = () => {
                 <div className="row gap-5">
                 {searchResults ? (
                     searchResults.map((result, index) => {
-                        const isFavorite = userInfo ? (result.content_type === "tv" ? userTvShows.includes(result.id) : userMovies.includes(result.id)) : null;
+                        const isFavorite = userInfo ? (result.media_type === "tv" ? userTvShows.includes(result.id) : userMovies.includes(result.id)) : null;
                         return (
                             <ContentCard
                                 key={index}

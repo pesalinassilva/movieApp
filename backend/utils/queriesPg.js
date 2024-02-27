@@ -12,8 +12,15 @@ const pool = new Pool ({
     allowExitOnIdle: true
 })
 
-const showMovies = async() => {
+const getTopRated = async() => {
     const response = await axios.get(`${APIINFO.urlBase}/movie/top_rated?page=01&api_key=${APIINFO.key}`)
+    return response.data.results
+}
+
+const getTopRatedPages = async(page) => {
+    const response = await axios.post(`${APIINFO.urlBase}/movie/top_rated?page=${"1"}&api_key=${APIINFO.key}`)
+    console.log(response)
+    //const response = await axios.post(`https://api.themoviedb.org/3/movie/top_rated?page=${page.page}&api_key=cf08696c1d908dffc3b1a61b81eacbaa`)
     return response.data.results
 }
 
@@ -118,4 +125,4 @@ const editUser = async() => {
 }
 
 
-module.exports = { showMovies, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, editUser, getContentDetails }
+module.exports = { getTopRated, getTopRatedPages, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, editUser, getContentDetails }
