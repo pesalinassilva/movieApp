@@ -4,7 +4,7 @@ const app = express()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 
-const { showMovies, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, getContentDetails } = require('../utils/queriesPg.js')
+const { getTopRated, getTopRatedPages, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, getContentDetails } = require('../utils/queriesPg.js')
 
 app.listen(3000, console.log("SERVER ON"))
 app.use(cors())
@@ -32,13 +32,24 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-//Mostrar un listado de peliculas. FALTA LA PAGINACIÓN.
-app.get('/home', async(req, res) => {
+//Mostrar un listado de peliculas.
+app.get('/get_toprated_movies', async(req, res) => {
     try {
-        const movies = await showMovies()
+        const movies = await getTopRated()
         res.json(movies)
     } catch (error) {
         res.status(500).send(error)
+    }
+})
+
+//paginacion
+app.post('/top_rated_pages', async(req, res) => {
+    try {
+        const {page} = req.body
+        const movies = await getTopRatedPages(page)
+        res.json(movies)
+    } catch (error) {
+        res.status(404).send(error.message)
     }
 })
 
