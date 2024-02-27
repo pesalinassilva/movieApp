@@ -8,32 +8,24 @@ import ContentDetail from "./ContentDetails"
 const ContentCard = ( {contentInfo, isFavorite = null} ) => {
     const navigate = useNavigate()
     const { userInfo, setUserInfo } = useContext(MovieContext)
-    const user = userInfo ? userInfo.user : null
-    const isMovie = () => (contentInfo.media_type === 'movie' || !contentInfo.media_type )? true : false
-
     const [show, setShow] = useState(false)
+
+    const user = userInfo ? userInfo.user : null
+
     const handleClose = () => setShow(false)
     const handleShow = () => {
         setShow(true)
     }
 
-    const saveFavContent = () => {
-        const validationTypeOfContent = isMovie()
+    const saveOrDeleteFavContent = () => {
         if (user){
-            const payload = validationTypeOfContent ? {
+            const payload = {
                 user_id: user.id,
                 content_id: contentInfo.id,
-                media_type: 'movie',
-                name: contentInfo.title,
+                media_type: (contentInfo.media_type === 'movie' || !contentInfo.media_type )? 'movie' : 'tv',
+                name: contentInfo.title ? contentInfo.title : contentInfo.name,
                 poster: contentInfo.poster_path,
-                release_date: contentInfo.release_date
-            } : {
-                user_id: user.id,
-                content_id: contentInfo.id,
-                media_type: contentInfo.media_type,
-                name: contentInfo.name,
-                poster: contentInfo.poster_path,
-                release_date: contentInfo.first_air_date
+                release_date: contentInfo.release_date ? contentInfo.release_date : contentInfo.first_air_date
             }
 
             if(!isFavorite){
@@ -79,10 +71,10 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
             <div className="card-body">
                 <h5 className="card-title">{contentInfo.name}</h5>
                 <p className="card-text">{contentInfo.release_date}</p>
-                <small>{contentInfo.content_type ? contentInfo.content_type : 'movie'}</small>
+                <small>{contentInfo.media_type ? contentInfo.media_type : 'movie'}</small>
                 <p className="card-text"><small>{contentInfo.vote_average}</small></p>
                 <button onClick={handleShow} className="btn btn-outline-secondary" type="button" id="button-addon2">Ver Detalles</button>
-                <button onClick={saveFavContent} className="btn btn-outline-secondary" type="button" id="button-addon2">{isFavorite ? "Quitar de Favoritos" : "Agregar a favorito "}</button>
+                <button onClick={saveOrDeleteFavContent} className="btn btn-outline-secondary" type="button" id="button-addon2">{isFavorite ? "Quitar de Favoritos" : "Agregar a favorito "}</button>
             </div>
             <ContentDetail 
                 show={show}

@@ -128,7 +128,6 @@ app.post('/save_favorites', async(req, res) => {
 app.delete('/delete_from_favorites', async(req, res) => {
     try {
         const content = req.body
-        console.log(content)
         await deleteFromFavorites(content)
         res.json('Contenido eliminado de los favoritos')
     } catch (error) {
