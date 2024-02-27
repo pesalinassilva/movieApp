@@ -22,7 +22,7 @@ const SearchResults = () => {
         }
     }
 
-    console.log(userInfo)
+    console.log(userInfo?.favorites)
     
     const favoritesByUser = userInfo ? userInfo.favorites : []
     const userTvShows = favoritesByUser.filter(item => item.content_type === "tv").map(item => item.content_id)
