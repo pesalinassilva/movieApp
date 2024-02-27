@@ -17,12 +17,6 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
         setShow(true)
     }
 
-    /*const getUserInfo = () => {
-        const token = window.sessionStorage.getItem('token')
-        const data = axios.get(ENDPOINT.profile, { headers: { Authorization: `Bearer ${token}` } })
-        setUserInfo(data)
-    }*/
-
     const saveFavContent = () => {
         const validationTypeOfContent = isMovie()
         if (user){
@@ -42,24 +36,36 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
                 release_date: contentInfo.first_air_date
             }
 
-            axios.post(ENDPOINT.saveFavorites, payload)
-            .then(() => {
-                window.alert('Contenido guardado con éxito!')
-            })
-            .catch(({ response: { data } }) => {
-                console.error(data)
-                window.alert(`${data.message} 🙁.`)
-            })
-
-            const newFavorites = [
-                ...userInfo.favorites,
-                {
-                    id_user_liked: user.id,
-                    content_id: payload.content_id,
-                    content_type: payload.media_type ? payload.media_type : 'movie'
-                }
-            ]
-            setUserInfo({...userInfo, favorites:newFavorites})
+            if(!isFavorite){
+                axios.post(ENDPOINT.saveFavorites, payload)
+                .then(() => {
+                    window.alert('Contenido guardado con éxito!')
+                })
+                .catch(({ response: { data } }) => {
+                    console.error(data)
+                    window.alert(`${data.message} 🙁.`)
+                })
+    
+                const newFavorites = [
+                    ...userInfo.favorites,
+                    {
+                        id_user_liked: user.id,
+                        content_id: payload.content_id,
+                        content_type: payload.media_type ? payload.media_type : 'movie'
+                    }
+                ]
+                setUserInfo({...userInfo, favorites:newFavorites})
+            }else{
+                axios.delete(ENDPOINT.deleteFromFav, { data: payload })
+                .then(() => {
+                    window.alert('Contenido eliminado con éxito');
+                }).catch(({ response: { data } }) => {
+                    console.error(data);
+                    window.alert(`${data.message} 🙁.`)
+                })
+                const newFavorites = userInfo.favorites.filter((fav) => (fav.id_user_liked !== payload.user_id && fav.content_id !== payload.content_id && fav.content_type !== payload.media_type))
+                setUserInfo({userInfo, favorites:newFavorites})
+            }
         }
         else{
             alert('Debes registrarte para poder guardar películas B)')

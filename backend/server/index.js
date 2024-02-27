@@ -125,11 +125,11 @@ app.post('/save_favorites', async(req, res) => {
 })
 
 //endpoint para delete.
-app.delete('/delete_from_favorites', verifyToken, async(req, res) => {
+app.delete('/delete_from_favorites', async(req, res) => {
     try {
-        const user = await showUser(req.email)
         const content = req.body
-        await deleteFromFavorites(content, user)
+        console.log(content)
+        await deleteFromFavorites(content)
         res.json('Contenido eliminado de los favoritos')
     } catch (error) {
         res.status(500).send(error.message)

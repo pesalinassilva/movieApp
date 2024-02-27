@@ -66,11 +66,12 @@ const userData = async (email) => {
 }
 
 //eliminar de favoritos
-const deleteFromFavorites = async(content, user) => {
+const deleteFromFavorites = async(content) => {
     try {
-        let { serie_id } = content
-        const consulta = "DELETE FROM series_by_user WHERE id_user_liked = $1 AND serie_id = $2"
-        const values = [user.id, serie_id]
+        //console.log(content)
+        let { user_id, content_id, media_type } = content
+        const consulta = "DELETE FROM movies_and_series_by_user WHERE id_user_liked = $1 AND content_id = $2 AND content_type = $3"
+        const values = [user_id, content_id, media_type]
         const { rows, rowCount } = await pool.query(consulta, values)
         if (rowCount === 0) {
             throw { code: 404, message: "No se encontro ningún registro con los criterios indicados" }
