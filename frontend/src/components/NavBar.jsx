@@ -10,7 +10,7 @@ const NavBar = () => {
     const logout = () => {
         setUserInfo()
         window.sessionStorage.removeItem('token')
-        navigate('/home')
+        navigate('/')
     }
     
     const isLogin = () => {
@@ -54,7 +54,7 @@ const NavBar = () => {
         <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
-                <Link to='/home' className='btn m-1 register-btn'>
+                <Link to='/' className='btn m-1 register-btn'>
                     <h3>Movie App</h3>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -6,8 +6,8 @@ import ContentCard from '../components/ContentCard'
 import PaginationContent from "../components/PaginationContent";
 
 const Home = () => {
-    const [movies, setMovies] = useState([])
     const { userInfo } = useContext(MovieContext)
+    const [movies, setMovies] = useState([])
     
     const getMovieData = async () => {
         try {
