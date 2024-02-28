@@ -18,7 +18,7 @@ const Profile = () => {
             console.error(error)
             window.sessionStorage.removeItem('token');
             setUserInfo(null)
-            navigate('/home')
+            navigate('/')
         })
     }
 

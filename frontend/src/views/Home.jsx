@@ -23,15 +23,15 @@ const Home = () => {
     }, [])
 
     const favoritesByUser = userInfo ? userInfo.favorites : []
-    const userTvShows = favoritesByUser.filter(item => item.content_type === "tv").map(item => item.content_id)
-    const userMovies = favoritesByUser.filter(item => item.content_type === "movie").map(item => item.content_id)
+    const userTvShows = favoritesByUser.filter(item => item.media_type === "tv").map(item => item.content_id)
+    const userMovies = favoritesByUser.filter(item => item.media_type === "movie").map(item => item.content_id)
     
     return(
         <div className="container">
             <h1>Top Rated Movies</h1>
             <div className="row gap-5">
                 {movies.map((movie,index) => {
-                    const isFavorite = userInfo ? (movies.content_type === "tv" ? userTvShows.includes(movie.id) : userMovies.includes(movie.id)) : null
+                    const isFavorite = userInfo ? (movies.media_type === "tv" ? userTvShows.includes(movie.id) : userMovies.includes(movie.id)) : null
                     return (                
                         <ContentCard
                             key={index}

@@ -21,10 +21,10 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
         if (user){
             const payload = {
                 user_id: user.id,
-                content_id: contentInfo.id,
+                content_id: contentInfo.id ? contentInfo.id : contentInfo.content_id,
                 media_type: (contentInfo.media_type === 'movie' || !contentInfo.media_type )? 'movie' : 'tv',
                 name: contentInfo.title ? contentInfo.title : contentInfo.name,
-                poster: contentInfo.poster_path,
+                poster_path: contentInfo.poster_path,
                 release_date: contentInfo.release_date ? contentInfo.release_date : contentInfo.first_air_date
             }
 
@@ -39,12 +39,7 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
                 })
     
                 const newFavorites = [
-                    ...userInfo.favorites,
-                    {
-                        id_user_liked: user.id,
-                        content_id: payload.content_id,
-                        content_type: payload.media_type ? payload.media_type : 'movie'
-                    }
+                    ...userInfo.favorites, payload
                 ]
                 setUserInfo({...userInfo, favorites:newFavorites})
             }else{
@@ -55,7 +50,9 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
                     console.error(data);
                     window.alert(`${data.message} 🙁.`)
                 })
-                const newFavorites = userInfo.favorites.filter((fav) => (fav.id_user_liked !== payload.user_id && fav.content_id !== payload.content_id && fav.content_type !== payload.media_type))
+                const newFavorites = userInfo.favorites.filter(fav => 
+                    !(fav.content_id === payload.content_id && fav.media_type === payload.media_type)
+                )
                 setUserInfo({userInfo, favorites:newFavorites})
             }
         }
