@@ -23,8 +23,8 @@ const SearchResults = () => {
     }
     
     const favoritesByUser = userInfo ? userInfo.favorites : []
-    const userTvShows = favoritesByUser.filter(item => item.content_type === "tv").map(item => item.content_id)
-    const userMovies = favoritesByUser.filter(item => item.content_type === "movie").map(item => item.content_id)
+    const userTvShows = favoritesByUser.filter(item => item.media_type === "tv").map(item => item.content_id)
+    const userMovies = favoritesByUser.filter(item => item.media_type === "movie").map(item => item.content_id)
 
     return(
         <div>

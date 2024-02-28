@@ -57,7 +57,7 @@ const userData = async (email) => {
             throw { code: 404, message: "Usuario no encontrado" }
         }
         const user = rowUser[0]
-        const getFavoritesFromUser = "SELECT id_user_liked, content_id, content_type FROM movies_and_series_by_user WHERE id_user_liked = $1"
+        const getFavoritesFromUser = "SELECT * FROM movies_and_series_by_user WHERE id_user_liked = $1"
         const { rows:rowFavorites } = await pool.query(getFavoritesFromUser, [user.id])
         return {user, favorites: rowFavorites}
     } catch (error) {
@@ -68,9 +68,8 @@ const userData = async (email) => {
 //eliminar de favoritos
 const deleteFromFavorites = async(content) => {
     try {
-        //console.log(content)
         let { user_id, content_id, media_type } = content
-        const consulta = "DELETE FROM movies_and_series_by_user WHERE id_user_liked = $1 AND content_id = $2 AND content_type = $3"
+        const consulta = "DELETE FROM movies_and_series_by_user WHERE id_user_liked = $1 AND content_id = $2 AND media_type = $3"
         const values = [user_id, content_id, media_type]
         const { rows, rowCount } = await pool.query(consulta, values)
         if (rowCount === 0) {
@@ -105,7 +104,7 @@ const searchMoviesAndSeries = async(name) => {
 
 //registrar en tabla SQL.
 const saveToFavorites = async(content) => {
-    let { user_id, content_id, name, overview, poster_path, media_type, release_date } = content
+    let { user_id, content_id, media_type, poster_path, name, release_date } = content
     const values = [ user_id, content_id, media_type, name, poster_path, release_date]
     const consulta = "INSERT INTO movies_and_series_by_user values (DEFAULT, $1, $2, $3, $4, $5, $6)"
     await pool.query(consulta,values)
