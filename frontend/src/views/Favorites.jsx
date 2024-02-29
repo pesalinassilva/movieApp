@@ -7,15 +7,14 @@ const Favorites = () => {
 
     const favoritesByUser = userInfo ? userInfo.favorites : []
 
-    console.log(userInfo)
     return(
         <div className="container text-light text-center">
         <h1 className="my-3">Mis Favoritos</h1>
-        <div className="row gap-5">
+        {favoritesByUser.length > 0 ? 
+        (<div className="row gap-5">
             {favoritesByUser.map((fav,index) => {
                 const {content_id , id_user_liked, media_type, name, poster_path, release_date } = fav
                 const infoFav = {content_id , id_user_liked, media_type, name, poster_path, release_date}
-                console.log(infoFav, 'infofav')
                 return (                
                     <ContentCard
                         key={index}
@@ -24,7 +23,9 @@ const Favorites = () => {
                     />
                 )
             })}      
-        </div>
+        </div>)
+        : (<h3 className="text-light-emphasis">Aca apareceran tus favoritos, agrega todos los que quieras!</h3>)
+        }
     </div>
     )
 }
