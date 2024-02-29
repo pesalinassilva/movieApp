@@ -34,8 +34,8 @@ const verifyToken = (req, res, next) => {
 //Mostrar un listado de peliculas.
 app.get('/get_movies', async(req, res) => {
     try {
-        const {section, page} = req.query
-        const movies = await getTopRated(section, page)
+        const {media_type, section, page} = req.query
+        const movies = await getTopRated(media_type, section, page)
         res.json(movies)
     } catch (error) {
         res.status(500).send(error)

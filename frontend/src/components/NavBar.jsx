@@ -55,10 +55,13 @@ const NavBar = () => {
         <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#100219'}}>
             <div className="container-fluid">
                 <Link to='/' className='btn m-1 register-btn text-light'>
-                    <h3>Movie App</h3>
+                    <img src="/movie_app_logo.png"/>
                 </Link>
-                <Link to='/most_popular' className='btn mt-3 register-btn text-light'>
+                <Link to='/popular_movies' className='btn mt-3 register-btn text-light'>
                     <p>Popular Movies</p>
+                </Link>
+                <Link to='/popular_series' className='btn mt-3 register-btn text-light'>
+                    <p>Popular Series</p>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

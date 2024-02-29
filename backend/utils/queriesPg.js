@@ -12,8 +12,8 @@ const pool = new Pool ({
     allowExitOnIdle: true
 })
 
-const getTopRated = async(section, page) => {
-    const response = await axios.get(`${APIINFO.urlBase}/movie/${section}?page=${page}&api_key=${APIINFO.key}`)
+const getTopRated = async(media_type, section, page) => {
+    const response = await axios.get(`${APIINFO.urlBase}/${media_type}/${section}?page=${page}&api_key=${APIINFO.key}`)
     return response.data
 }
 

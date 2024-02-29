@@ -5,7 +5,7 @@ import MovieContext from "../context/MovieContext";
 import ContentCard from '../components/ContentCard'
 import ReactPaginate from 'react-paginate'
 
-const MostPopular = () => {
+const PopularSeries = () => {
     const { userInfo } = useContext(MovieContext)
     const [movies, setMovies] = useState([])
     const [page, setPage] = useState(1)
@@ -14,7 +14,7 @@ const MostPopular = () => {
     
     const getMovieData = async () => {
         try {
-            const response = await axios.get(`${ENDPOINT.getMovies}?section=${'popular'}&page=${page}`)
+            const response = await axios.get(`${ENDPOINT.getMovies}?media_type=${'tv'}&section=${'popular'}&page=${page}`)
             setMovies(response.data.results)
             setTotalPages(response.data.total_pages)
             setCargando(false)
@@ -49,7 +49,7 @@ const MostPopular = () => {
 
     return(
         <div className="container" style={{ backgroundColor: "#210930" }} >
-            <h1 className="text-light text-center my-3">Most Popular Movies</h1>
+            <h1 className="text-light text-center my-3">Most Popular Tv Series</h1>
             <div className="row gap-5 justify-content-center" style={{ backgroundColor: "#210930" }}>
                 {movies.map((movie,index) => {
                     const isFavorite = userInfo ? (movies.media_type === "tv" ? userTvShows.includes(movie.id) : userMovies.includes(movie.id)) : null
@@ -80,4 +80,4 @@ const MostPopular = () => {
     )
 }
 
-export default MostPopular
+export default PopularSeries
