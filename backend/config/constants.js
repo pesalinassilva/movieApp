@@ -6,7 +6,7 @@ const BBDD = {
 }
 
 const APIINFO = {
-    key: 'cf08696c1d908dffc3b1a61b81eacbaa',
+    key: process.env.API_KEY,
     urlBase: 'https://api.themoviedb.org/3'
 }
 
