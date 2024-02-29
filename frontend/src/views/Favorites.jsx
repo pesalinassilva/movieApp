@@ -15,7 +15,7 @@ const Favorites = () => {
             {favoritesByUser.map((fav,index) => {
                 const {content_id , id_user_liked, media_type, name, poster_path, release_date } = fav
                 const infoFav = {content_id , id_user_liked, media_type, name, poster_path, release_date}
-                //console.log(infoFav, 'infofav')
+                console.log(infoFav, 'infofav')
                 return (                
                     <ContentCard
                         key={index}

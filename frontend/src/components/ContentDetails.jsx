@@ -8,10 +8,10 @@ import { useEffect, useState } from "react"
 const ContentDetail = ({ show, handleClose, content}) => {
     const [contentDetails, setContentDetails] = useState(null)
     const [crewDetails, setCrewDetails] = useState(null)
-
+    
     const payload = !content.media_type || content.media_type === 'movie' ? {
-        media_type:'movie', content_id: content.id } : {
-        media_type:'tv', content_id: content.id
+        media_type:'movie', content_id: content.id ? content.id : content.content_id } : {
+        media_type:'tv', content_id: content.id ? content.id : content.content_id
         }
 
     const getDetails = async () => {
@@ -46,7 +46,7 @@ const ContentDetail = ({ show, handleClose, content}) => {
                             <div className="card-body">
                                 <small className="card-text">{`${contentDetails?.overview}`} <br/></small>
                                 <br/>{contentDetails?.genres.map((genre) => (<Badge key={genre.id} bg="secondary">{genre.name}</Badge>))}
-                                <small><br/>{`Calificaciones: ${contentDetails?.vote_average}/10`}</small>
+                                <small><br/>{`Calificaciones: ${Math.round(contentDetails?.vote_average*10)/10}/10`}</small>
                                 <p className="card-text"><small className="text-body-secondary">{`Fecha de lanzamiento: ${contentDetails?.release_date ? contentDetails?.release_date : contentDetails?.first_air_date}`}</small></p>
                                 <p><br/>Reparto</p>
                                 {crewDetails?.cast.map((actor, index) => (<small key={index}>{actor.name}, </small>))}
