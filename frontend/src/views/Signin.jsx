@@ -10,6 +10,7 @@ const initialForm = {
     password: ''
 }
 
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 
 const Signin = () => {
     const navigate = useNavigate()
@@ -25,6 +26,19 @@ const Signin = () => {
 
     const handleForm = (event) => {
         event.preventDefault()
+        
+        if (
+            !user.email.trim() ||
+            !user.password.trim() ||
+            !user.user_name.trim()
+        ) {
+            return window.alert('Todos los campos son obligatorias.')
+        }
+
+        if (!emailRegex.test(user.email)) {
+            return window.alert('El formato del email no es correcto!')
+        }
+
         axios.post(ENDPOINT.signin, user)
             .then(() => {
                 setShowAlertMessage(true)

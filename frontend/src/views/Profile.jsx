@@ -29,7 +29,6 @@ const Profile = () => {
             <div className="card text-center" style={{width: "100vw"}}>
                 <div className="card-body">
                     <h1 className="card-title">Bienvenido <span className='fw-bold'>{userInfo?.user?.user_name}</span></h1>
-                    <h6 className="card-subtitle mb-2 text-body-secondary">Aca podrás modificar tu información de usuario</h6>
                     <h5 className="card-text">usuario: {userInfo?.user?.user_name}</h5>
                     <h5 className="card-text">correo: {userInfo?.user?.email}</h5>
                     <Link to='/favorites' className='btn btn-info'>Ir a mis favoritos</Link>

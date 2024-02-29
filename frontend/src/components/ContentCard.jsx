@@ -15,7 +15,9 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
 
     const user = userInfo ? userInfo.user : null
 
-    const handleClose = () => setShow(false)
+    const handleClose = () => {
+        setShow(false)
+    }
     const handleShow = () => setShow(true)
 
     const handleCloseAlert = () => setShowAlertMessage(false)
@@ -69,6 +71,7 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
 
     return(
         <div className="card col-md-4 mb-3" style={{ width: "18rem" }}>
+            {console.log(contentInfo)}
             <img src={`${URLPOSTER}${contentInfo.poster_path}`} className="card-img" alt={`${contentInfo.title}s poster`}/>
                 <h5 className="card-title text-center">{contentInfo.name ? contentInfo.name : contentInfo.title}</h5>
             <div className="card-body align-items-end">

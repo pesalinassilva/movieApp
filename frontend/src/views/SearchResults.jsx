@@ -39,8 +39,8 @@ const SearchResults = () => {
     return(
         <div>
             <form onSubmit={getSearchResults} className="col-10 col-sm-6 col-md-3 m-auto mt-5">
-                <div className='form-group mt-1 '>
-                    <label>Search</label>
+                <div className='form-group mt-1 d-flex flex-column text-center'>
+                    <h2 className='mb-2'>Buscar película o Series</h2>
                     <input
                         value={search}
                         onChange={handleSearch}
@@ -49,8 +49,8 @@ const SearchResults = () => {
                         className='form-control'
                         placeholder='Search for Movies or Tv Shows B)'
                     />
+                    <button className="btn btn-outline-secondary mt-2 mb-3" type="submit">Buscar</button>
                 </div>
-                <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
             </form>
             <div className="container">
                 <div className="row gap-5 justify-content-center">
@@ -66,7 +66,9 @@ const SearchResults = () => {
                         );
                     })
                     ) : (
-                        <h1>Aca apareceran tus resultados B)</h1>
+                        <div className='text-center text-body-tertiary fst-italic mt-4'>
+                            <h4>Aca apareceran tus resultados B)</h4>
+                        </div>
                     )
                 }
                 </div>

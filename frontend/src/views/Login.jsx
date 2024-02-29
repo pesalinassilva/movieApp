@@ -6,6 +6,7 @@ import MovieContext from '../context/MovieContext'
 import NotificationAlert from '../components/NotificationAlert.jsx'
 
 const initialForm = { email: '', password: '' }
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 
 const Login = () => {
     const navigate = useNavigate()
@@ -23,6 +24,13 @@ const Login = () => {
 
     const handleForm = async(event) => {
         event.preventDefault()
+        if (!user.email.trim() || !user.password.trim()) {
+            return window.alert('Email y password obligatorias.')
+        }
+    
+        if (!emailRegex.test(user.email)) {
+            return window.alert('El formato del email no es correcto!')
+        }
         try {
             const response = await axios.post(ENDPOINT.login, user)
             const { data } = response
