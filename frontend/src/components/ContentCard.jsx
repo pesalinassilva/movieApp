@@ -71,12 +71,12 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
 
     return(
         <div className="card col-md-4 mb-3" style={{ width: "18rem", backgroundColor:'#0a022a'}}>
-            <img src={`${URLPOSTER}${contentInfo.poster_path}`} className="card-img my-2" alt={`${contentInfo.title}s poster`}/>
+            <img src={contentInfo.poster_path ? `${URLPOSTER}${contentInfo.poster_path}`: '/not_available.jpeg'} className="card-img my-2" alt={`${contentInfo.title}s poster`}/>
             <h5 className="card-title text-center text-light">{contentInfo.name ? contentInfo.name : contentInfo.title}</h5>
             <h6 className="card-subtitle text-center text-light">{contentInfo.release_date ? contentInfo.release_date : contentInfo.first_air_date}</h6>
             <div className="card-body align-items-end">
                 <div className="d-flex justify-content-center">
-                    <small className="text-light me-3 mb-3">{contentInfo.media_type ? contentInfo.media_type : 'Movie'}</small>
+                    <small className="text-light me-3 mb-3">{contentInfo.media_type ? contentInfo.media_type : null}</small>
                     <p className="card-text text-light"><small>{contentInfo.vote_average ? Math.round(contentInfo.vote_average*10)/10 : null}</small></p>
                 </div>
                 <button onClick={handleShow} className="btn btn-primary btn-sm me-1 ms-2" type="button">Detalles</button>

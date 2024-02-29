@@ -9,7 +9,8 @@ import Login from './views/Login';
 import Profile from './views/Profile';
 import Favorites from './views/Favorites';
 import SearchResults from './views/SearchResults';
-import MostPopular from './views/MostPopular';
+import PopularMovies from './views/PopularMovies';
+import PopularSeries from './views/PopularSeries';
 
 import './App.css'
 
@@ -29,7 +30,8 @@ function App() {
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/search' element={<SearchResults/>}/>
           <Route path='/favorites' element={<Favorites/>}/>
-          <Route path='/most_popular' element={<MostPopular/>}/>
+          <Route path='/popular_movies' element={<PopularMovies/>}/>
+          <Route path='/popular_series' element={<PopularSeries/>}/>
         </Routes>
       </BrowserRouter>
     </MovieContext.Provider>
