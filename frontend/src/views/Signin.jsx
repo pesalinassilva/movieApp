@@ -58,7 +58,7 @@ const Signin = () => {
 
     return(
         <div>
-            <form onSubmit={handleForm} className='col-10 col-sm-6 col-md-3 m-auto mt-5'>
+            <form onSubmit={handleForm} className='col-10 col-sm-6 col-md-3 m-auto mt-5 text-light'>
                 <h1 className='text-center'>Registrar nuevo usuario</h1>
                 <hr />
                 <div className='form-group mt-1 '>
@@ -96,7 +96,7 @@ const Signin = () => {
                 </div>
                 <div className='d-flex justify-content-center mt-3'>
                     <button type='submit' className='btn btn-light'>Registrarme</button>
-                    <Link to='/login' className='btn login-btn btn-sm text-secondary'>ó Inicia sesión</Link>
+                    <Link to='/login' className='btn login-btn btn-sm text-secondary'>O Inicia sesión</Link>
                 </div>
             </form>
             <NotificationAlert 

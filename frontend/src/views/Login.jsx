@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ENDPOINT } from '../config/constants.js'
 import MovieContext from '../context/MovieContext'
 import NotificationAlert from '../components/NotificationAlert.jsx'
@@ -51,7 +51,7 @@ const Login = () => {
 
     return(
         <div>
-            <form onSubmit={handleForm} className='col-10 col-sm-6 col-md-3 m-auto mt-5'>
+            <form onSubmit={handleForm} className='col-10 col-sm-6 col-md-3 m-auto mt-5 text-light'>
             <h1>Iniciar Sesión</h1>
             <hr />
             <div className='form-group mt-1 '>
@@ -76,7 +76,10 @@ const Login = () => {
                     placeholder='Password'
                 />
             </div>
-            <button type='submit' className='btn btn-light mt-3'>Iniciar Sesión</button>
+            <div className='d-flex justify-content-center mt-3'>
+            <button type='submit' className='btn btn-light'>Iniciar Sesión</button>
+                <Link to='/login' className='btn login-btn btn-sm text-secondary'>O Registrate!</Link>
+            </div>
         </form>
             <NotificationAlert 
                 showAlert={showAlertMessage}

@@ -25,12 +25,12 @@ const Profile = () => {
     useEffect(getUserInfo, [])
 
     return (
-        <div className='d-flex justify-content-center flex-column'>
-            <div className="card text-center" style={{width: "100vw"}}>
+        <div className='d-flex justify-content-center flex-column' style={{backgroundColor:'#0a022a'}}>
+            <div className="card text-center" style={{width: "100vw", backgroundColor:'#210930'}}>
                 <div className="card-body">
-                    <h1 className="card-title">Bienvenido <span className='fw-bold'>{userInfo?.user?.user_name}</span></h1>
-                    <h5 className="card-text">usuario: {userInfo?.user?.user_name}</h5>
-                    <h5 className="card-text">correo: {userInfo?.user?.email}</h5>
+                    <h1 className="card-title text-light">Bienvenido <span className='fw-bold text-light'>{userInfo?.user?.user_name}</span></h1>
+                    <h5 className="card-text text-light">usuario: {userInfo?.user?.user_name}</h5>
+                    <h5 className="card-text text-light">correo: {userInfo?.user?.email}</h5>
                     <Link to='/favorites' className='btn btn-info'>Ir a mis favoritos</Link>
                 </div>
             </div>

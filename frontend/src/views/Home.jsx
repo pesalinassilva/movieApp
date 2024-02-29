@@ -36,9 +36,9 @@ const Home = () => {
     const userMovies = favoritesByUser.filter(item => item.media_type === "movie").map(item => item.content_id)
     
     return(
-        <div className="container">
-            <h1>Top Rated Movies</h1>
-            <div className="row gap-5 justify-content-center">
+        <div className="container" style={{ backgroundColor: "#210930" }} >
+            <h1 className="text-light text-center my-3">Top Rated Movies</h1>
+            <div className="row gap-5 justify-content-center" style={{ backgroundColor: "#210930" }}>
                 {movies.map((movie,index) => {
                     const isFavorite = userInfo ? (movies.media_type === "tv" ? userTvShows.includes(movie.id) : userMovies.includes(movie.id)) : null
                     return (                

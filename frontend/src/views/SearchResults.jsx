@@ -38,7 +38,7 @@ const SearchResults = () => {
 
     return(
         <div>
-            <form onSubmit={getSearchResults} className="col-10 col-sm-6 col-md-3 m-auto mt-5">
+            <form onSubmit={getSearchResults} className="col-10 col-sm-6 col-md-3 m-auto mt-5 text-light">
                 <div className='form-group mt-1 d-flex flex-column text-center'>
                     <h2 className='mb-2'>Buscar película o Series</h2>
                     <input
@@ -49,7 +49,7 @@ const SearchResults = () => {
                         className='form-control'
                         placeholder='Search for Movies or Tv Shows B)'
                     />
-                    <button className="btn btn-outline-secondary mt-2 mb-3" type="submit">Buscar</button>
+                    <button className="btn btn-outline-primary mt-2 mb-3" type="submit">Buscar</button>
                 </div>
             </form>
             <div className="container">
@@ -66,8 +66,8 @@ const SearchResults = () => {
                         );
                     })
                     ) : (
-                        <div className='text-center text-body-tertiary fst-italic mt-4'>
-                            <h4>Aca apareceran tus resultados B)</h4>
+                        <div className='text-center mt-4 text-light'>
+                            <h4>Aca apareceran tus resultados 😉</h4>
                         </div>
                     )
                 }
