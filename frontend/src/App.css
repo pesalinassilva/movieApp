@@ -6,6 +6,7 @@
 
 .pagination {
   display: inline-block;
+  color: #fff;
 }
 
 .pagination li {
@@ -16,9 +17,11 @@
 
 .pagination li a {
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #424242;
+  border-radius: 10px;
   text-decoration: none;
-  color: #333;
+  color: #fff;
+  background-color: #424242;
 }
 
 .pagination li.active a {
@@ -44,9 +47,9 @@
 .pagination li.previous a,
 .pagination li.next a {
   padding: 6px 10px;
-  border: 1px solid #ddd;
-  background-color: #f8f9fa;
-  color: #333;
+  border: 1px solid #424242;
+  background-color: #424242;
+  color: #fff;
 }
 
 .pagination li.previous a:hover,

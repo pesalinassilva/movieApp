@@ -20,13 +20,13 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul className="navbar-nav">
                         <li>
-                            <Link to='/search' className='btn register-btn'>Buscar</Link>
+                            <Link to='/search' className='btn btn-outline-primary register-btn me-1'>Buscar</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/signin' className='btn register-btn'>Registrarse</Link>
+                            <Link to='/signin' className='btn btn-outline-primary register-btn me-1'>Registrarse</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/login' className='btn login-btn'>Iniciar Sesión</Link>
+                            <Link to='/login' className='btn btn-outline-primary login-btn'>Iniciar Sesión</Link>
                         </li>
                     </ul>
                 </div>
@@ -36,12 +36,12 @@ const NavBar = () => {
     
         return (
             <>
-                <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <div className="collapse navbar-collapse justify-content-end text-light" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link to='/profile' className='btn m-1 register-btn'>Bienvenido {userInfo?.user?.user_name}!</Link>
-                            <Link to='/favorites' className='btn m-1 register-btn'>Favoritos</Link>
-                            <Link to='/search' className='btn m-1 register-btn'>Buscar</Link>
+                            <Link to='/profile' className='btn btn-outline-primary m-1 register-btn'>Bienvenido {userInfo?.user?.user_name}!</Link>
+                            <Link to='/favorites' className='btn btn-outline-primary m-1 register-btn'>Favoritos</Link>
+                            <Link to='/search' className='btn btn-outline-primary m-1 register-btn'>Buscar</Link>
                             <button onClick={logout} className='btn btn-danger'>Salir</button>
                         </li>
                     </ul>
@@ -52,7 +52,7 @@ const NavBar = () => {
 
     return(
         <>
-        <nav className="navbar navbar-expand-lg bg-primary">
+        <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#100219'}}>
             <div className="container-fluid">
                 <Link to='/' className='btn m-1 register-btn text-light'>
                     <h3>Movie App</h3>

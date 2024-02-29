@@ -9,8 +9,8 @@ const Favorites = () => {
 
     console.log(userInfo)
     return(
-        <div className="container">
-        <h1>Top Rated Movies</h1>
+        <div className="container text-light text-center">
+        <h1 className="my-3">Mis Favoritos</h1>
         <div className="row gap-5">
             {favoritesByUser.map((fav,index) => {
                 const {content_id , id_user_liked, media_type, name, poster_path, release_date } = fav
