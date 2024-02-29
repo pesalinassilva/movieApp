@@ -3,16 +3,19 @@ import { ENDPOINT } from "../config/constants"
 import { useContext, useEffect, useState } from "react";
 import MovieContext from "../context/MovieContext";
 import ContentCard from '../components/ContentCard'
-import PaginationContent from "../components/PaginationContent";
+import ReactPaginate from 'react-paginate'
 
 const Home = () => {
     const { userInfo } = useContext(MovieContext)
     const [movies, setMovies] = useState([])
+    const [page, setPage] = useState({page:1});
+    const [totalPages, setTotalPages] = useState(0);
     
     const getMovieData = async () => {
         try {
-            const response = await axios.get(ENDPOINT.home)
-            setMovies(response.data);
+            const response = await axios.post(ENDPOINT.home, page)
+            setMovies(response.data.results)
+            setTotalPages(response.data.total_pages)
         } catch (error) {
             console.error("Error fetching movie data:", error)
         }
@@ -20,7 +23,12 @@ const Home = () => {
     
     useEffect(() => {
         getMovieData()
-    }, [])
+    }, [page])
+
+    const handlePageClick = (data) => {
+        const selectedPage = data.selected + 1
+        setPage({page:selectedPage})
+    }
 
     const favoritesByUser = userInfo ? userInfo.favorites : []
     const userTvShows = favoritesByUser.filter(item => item.media_type === "tv").map(item => item.content_id)
@@ -41,9 +49,20 @@ const Home = () => {
                     )
                 })}      
             </div>
-            <PaginationContent
-                
+            <div className='pagination-container'>
+            <ReactPaginate
+                pageCount={totalPages}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination'}
+                activeClassName={'active'}
+                previousLabel={'Previous'}
+                nextLabel={'Next'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
             />
+        </div>
         </div>
     )
 }

@@ -11,7 +11,7 @@ import Favorites from './views/Favorites';
 import SearchResults from './views/SearchResults';
 
 
-//import './App.css'
+import './App.css'
 
 function App() {
   const [userInfo, setUserInfo ] = useState(null)
