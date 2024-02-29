@@ -52,9 +52,9 @@ const NavBar = () => {
 
     return(
         <>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-primary">
             <div className="container-fluid">
-                <Link to='/' className='btn m-1 register-btn'>
+                <Link to='/' className='btn m-1 register-btn text-light'>
                     <h3>Movie App</h3>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
