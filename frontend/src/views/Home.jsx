@@ -8,13 +8,13 @@ import ReactPaginate from 'react-paginate'
 const Home = () => {
     const { userInfo } = useContext(MovieContext)
     const [movies, setMovies] = useState([])
-    const [page, setPage] = useState({page:1})
+    const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0)
     const [cargando, setCargando] = useState(true)
     
     const getMovieData = async () => {
         try {
-            const response = await axios.post(ENDPOINT.home, page)
+            const response = await axios.get(`${ENDPOINT.getMovies}?section=${'top_rated'}&page=${page}`)
             setMovies(response.data.results)
             setTotalPages(response.data.total_pages)
             setCargando(false)
@@ -29,7 +29,7 @@ const Home = () => {
 
     const handlePageClick = (data) => {
         const selectedPage = data.selected + 1
-        setPage({page:selectedPage})
+        setPage(selectedPage)
         window.scrollTo(0, 0)
     }
 

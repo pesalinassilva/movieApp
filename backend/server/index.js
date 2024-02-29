@@ -32,18 +32,15 @@ const verifyToken = (req, res, next) => {
 };
 
 //Mostrar un listado de peliculas.
-app.post('/get_top_rated_movies', async(req, res) => {
+app.get('/get_movies', async(req, res) => {
     try {
-        const {page} = req.body
-        const movies = await getTopRated(page)
+        const {section, page} = req.query
+        const movies = await getTopRated(section, page)
         res.json(movies)
     } catch (error) {
         res.status(500).send(error)
     }
 })
-
-//paginacion
-
 
 //Registrar usuarios
 app.post('/sign_in', async (req, res) => {
