@@ -1,25 +1,34 @@
 import axios from 'axios'
 import { useContext, useState } from 'react'
 import { ENDPOINT } from '../config/constants'
-
 import MovieContext from "../context/MovieContext"
 import ContentCard from '../components/ContentCard'
+import ReactPaginate from 'react-paginate'
 
 const SearchResults = () => {
     const { userInfo } = useContext(MovieContext)
     const [search, setSearch] = useState('')
     const [searchResults, setSearchResults] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     const handleSearch = (event) => setSearch(event.target.value)
     
-    const getSearchResults = async (event) => {
+    const getSearchResults = async (event, page=1) => {
         event.preventDefault()
         try {
-            const response = await axios.get(`${ENDPOINT.search}?search=${search}`)
-            setSearchResults(response.data)
+            const response = await axios.get(`${ENDPOINT.search}?search=${search}&page=${page}`)
+            setSearchResults(response.data.results)
+            setTotalPages(response.data.total_pages)
+            setCurrentPage(page)
         } catch (error) {
             console.error("Error searching in movie data:", error.message)
         }
+    }
+
+    const handlePageClick = (data) => {
+        const selectedPage = data.selected + 1
+        getSearchResults(event, selectedPage)
     }
     
     const favoritesByUser = userInfo ? userInfo.favorites : []
@@ -59,6 +68,21 @@ const SearchResults = () => {
                         <h1>Aca apareceran tus resultados B)</h1>
                     )
                 }
+                </div>
+                <div className='pagination-container'>
+                    <ReactPaginate
+                        pageCount={totalPages}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        onPageChange={handlePageClick}
+                        containerClassName={'pagination'}
+                        activeClassName={'active'}
+                        previousLabel={'Previous'}
+                        nextLabel={'Next'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        forcePage={currentPage - 1}
+                    />
                 </div>
             </div>
         </div>

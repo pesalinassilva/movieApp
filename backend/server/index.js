@@ -4,7 +4,7 @@ const app = express()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 
-const { getTopRated, getTopRatedPages, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, getContentDetails } = require('../utils/queriesPg.js')
+const { getTopRated, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, getContentDetails } = require('../utils/queriesPg.js')
 
 app.listen(3000, console.log("SERVER ON"))
 app.use(cors())
@@ -33,9 +33,10 @@ const verifyToken = (req, res, next) => {
 };
 
 //Mostrar un listado de peliculas.
-app.get('/get_toprated_movies', async(req, res) => {
+app.post('/get_top_rated_movies', async(req, res) => {
     try {
-        const movies = await getTopRated()
+        const {page} = req.body
+        const movies = await getTopRated(page)
         res.json(movies)
     } catch (error) {
         res.status(500).send(error)
@@ -43,15 +44,7 @@ app.get('/get_toprated_movies', async(req, res) => {
 })
 
 //paginacion
-app.post('/top_rated_pages', async(req, res) => {
-    try {
-        const {page} = req.body
-        const movies = await getTopRatedPages(page)
-        res.json(movies)
-    } catch (error) {
-        res.status(404).send(error.message)
-    }
-})
+
 
 //Registrar usuarios
 app.post('/sign_in', async (req, res) => {
@@ -103,10 +96,10 @@ app.post('/favorites', async(req, res) => {
 })
 
 //Buscar pelicula o serie según nombre en la api
-app.get('/search', async(req, res) => {
+app.get('/get_search', async(req, res) => {
     try {
-        const { search } = req.query
-        const searchResult = await searchMoviesAndSeries(search)
+        const { search, page } = req.query
+        const searchResult = await searchMoviesAndSeries(search, page)
         res.json(searchResult)
     } catch (error) {
         res.status(500).send(error.message)

@@ -1,42 +1,55 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.pagination {
+  display: inline-block;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pagination li {
+  display: inline-block;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.pagination li a {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  color: #333;
 }
 
-.card {
-  padding: 2em;
+.pagination li.active a {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
 }
 
-.read-the-docs {
-  color: #888;
+.pagination li.disabled a {
+  cursor: not-allowed;
+  color: #999;
+}
+
+.pagination li.break-me a {
+  cursor: default;
+}
+
+.pagination li.previous,
+.pagination li.next {
+  margin-right: 10px;
+}
+
+.pagination li.previous a,
+.pagination li.next a {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.pagination li.previous a:hover,
+.pagination li.next a:hover {
+  background-color: #e9ecef;
 }
