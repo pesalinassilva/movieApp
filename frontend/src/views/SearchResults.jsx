@@ -9,8 +9,8 @@ const SearchResults = () => {
     const { userInfo } = useContext(MovieContext)
     const [search, setSearch] = useState('')
     const [searchResults, setSearchResults] = useState(null)
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(0)
 
     const handleSearch = (event) => setSearch(event.target.value)
     

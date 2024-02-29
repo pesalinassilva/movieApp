@@ -60,7 +60,7 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
                 const newFavorites = userInfo.favorites.filter(fav => 
                     !(fav.content_id === payload.content_id && fav.media_type === payload.media_type)
                 )
-                setUserInfo({userInfo, favorites:newFavorites})
+                setUserInfo({user, favorites:newFavorites})
             }
         }
         else{

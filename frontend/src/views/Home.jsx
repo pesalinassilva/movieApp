@@ -8,14 +8,16 @@ import ReactPaginate from 'react-paginate'
 const Home = () => {
     const { userInfo } = useContext(MovieContext)
     const [movies, setMovies] = useState([])
-    const [page, setPage] = useState({page:1});
-    const [totalPages, setTotalPages] = useState(0);
+    const [page, setPage] = useState({page:1})
+    const [totalPages, setTotalPages] = useState(0)
+    const [cargando, setCargando] = useState(true)
     
     const getMovieData = async () => {
         try {
             const response = await axios.post(ENDPOINT.home, page)
             setMovies(response.data.results)
             setTotalPages(response.data.total_pages)
+            setCargando(false)
         } catch (error) {
             console.error("Error fetching movie data:", error)
         }
@@ -35,6 +37,16 @@ const Home = () => {
     const userTvShows = favoritesByUser.filter(item => item.media_type === "tv").map(item => item.content_id)
     const userMovies = favoritesByUser.filter(item => item.media_type === "movie").map(item => item.content_id)
     
+    if (cargando) {
+        return (
+            <div className="d-flex justify-content-center">
+                <div className="spinner-grow text-light m-5" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        )
+    }
+
     return(
         <div className="container" style={{ backgroundColor: "#210930" }} >
             <h1 className="text-light text-center my-3">Top Rated Movies</h1>

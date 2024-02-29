@@ -39,7 +39,7 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse justify-content-end text-light" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link to='/profile' className='btn btn-outline-primary m-1 register-btn'>Bienvenido {userInfo?.user?.user_name}!</Link>
+                            <Link to='/profile' className='btn btn-outline-primary m-1 register-btn'>Perfil</Link>
                             <Link to='/favorites' className='btn btn-outline-primary m-1 register-btn'>Favoritos</Link>
                             <Link to='/search' className='btn btn-outline-primary m-1 register-btn'>Buscar</Link>
                             <button onClick={logout} className='btn btn-danger'>Salir</button>
@@ -56,6 +56,9 @@ const NavBar = () => {
             <div className="container-fluid">
                 <Link to='/' className='btn m-1 register-btn text-light'>
                     <h3>Movie App</h3>
+                </Link>
+                <Link to='/most_popular' className='btn mt-3 register-btn text-light'>
+                    <p>Popular Movies</p>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

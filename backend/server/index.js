@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-//const axios = require('axios')
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 
@@ -62,7 +61,7 @@ app.post('/log_in', async (req, res) => {
     try {
         const { email, password } = req.body
         await logInUser(email, password)
-        const token = jwt.sign({ email }, "az_AZ", { expiresIn: 60 })
+        const token = jwt.sign({ email }, "az_AZ", { expiresIn: 1800 })
         res.send(token)
     } catch (error) {
         console.log(error)
