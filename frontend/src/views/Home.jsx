@@ -28,6 +28,7 @@ const Home = () => {
     const handlePageClick = (data) => {
         const selectedPage = data.selected + 1
         setPage({page:selectedPage})
+        window.scrollTo(0, 0)
     }
 
     const favoritesByUser = userInfo ? userInfo.favorites : []
@@ -37,7 +38,7 @@ const Home = () => {
     return(
         <div className="container">
             <h1>Top Rated Movies</h1>
-            <div className="row gap-5">
+            <div className="row gap-5 justify-content-center">
                 {movies.map((movie,index) => {
                     const isFavorite = userInfo ? (movies.media_type === "tv" ? userTvShows.includes(movie.id) : userMovies.includes(movie.id)) : null
                     return (                

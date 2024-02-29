@@ -29,6 +29,7 @@ const SearchResults = () => {
     const handlePageClick = (data) => {
         const selectedPage = data.selected + 1
         getSearchResults(event, selectedPage)
+        window.scrollTo(0, 0)
     }
     
     const favoritesByUser = userInfo ? userInfo.favorites : []
@@ -52,7 +53,7 @@ const SearchResults = () => {
                 <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
             </form>
             <div className="container">
-                <div className="row gap-5">
+                <div className="row gap-5 justify-content-center">
                 {searchResults ? (
                     searchResults.map((result, index) => {
                         const isFavorite = userInfo ? (result.media_type === "tv" ? userTvShows.includes(result.id) : userMovies.includes(result.id)) : null;
