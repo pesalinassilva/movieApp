@@ -76,7 +76,7 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
             <h6 className="card-subtitle text-center text-light">{contentInfo.release_date ? contentInfo.release_date : contentInfo.first_air_date}</h6>
             <div className="card-body align-items-end">
                 <div className="d-flex justify-content-center">
-                    <small className="text-light me-3 mb-3">{contentInfo.media_type ? contentInfo.media_type : null}</small>
+                    <small className="text-light me-3 mb-3">{contentInfo.media_type ? contentInfo.media_type : 'Movie'}</small>
                     <p className="card-text text-light"><small>{contentInfo.vote_average ? Math.round(contentInfo.vote_average*10)/10 : null}</small></p>
                 </div>
                 <button onClick={handleShow} className="btn btn-primary btn-sm me-1 ms-2" type="button">Detalles</button>

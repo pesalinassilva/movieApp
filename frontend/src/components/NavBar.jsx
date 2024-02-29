@@ -60,9 +60,6 @@ const NavBar = () => {
                 <Link to='/popular_movies' className='btn mt-3 register-btn text-light'>
                     <p>Popular Movies</p>
                 </Link>
-                <Link to='/popular_series' className='btn mt-3 register-btn text-light'>
-                    <p>Popular Series</p>
-                </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

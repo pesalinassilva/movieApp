@@ -39,13 +39,8 @@ const Login = () => {
             window.sessionStorage.setItem('token', data)
             setUserInfo({})
         } catch (error) {
-            console.error('Error en la solicitud:', error)
-            if (error.response) {
-                const errorMessage = error.response.data.message
-                window.alert(`${errorMessage}`)
-            } else {
-                window.alert('Ocurrió un error al procesar la solicitud')
-            }
+            console.error(error.message)
+            window.alert('Usuario o contraseña no coinciden')
         }
     }
 
