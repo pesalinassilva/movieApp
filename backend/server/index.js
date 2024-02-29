@@ -3,7 +3,7 @@ const app = express()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 
-const { getTopRated, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, getContentDetails } = require('../utils/queriesPg.js')
+const { getContent, searchMoviesAndSeries, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, getContentDetails } = require('../utils/queriesPg.js')
 
 app.listen(3000, console.log("SERVER ON"))
 app.use(cors())
@@ -28,17 +28,17 @@ const verifyToken = (req, res, next) => {
         req.email = decoded.email
         req.id = decoded.id
         next()
-    });
-};
+    })
+}
 
 //Mostrar un listado de peliculas.
 app.get('/get_movies', async(req, res) => {
     try {
         const {media_type, section, page} = req.query
-        const movies = await getTopRated(media_type, section, page)
+        const movies = await getContent(media_type, section, page)
         res.json(movies)
     } catch (error) {
-        res.status(500).send(error)
+        res.status(400).send(error)
     }
 })
 
@@ -49,7 +49,7 @@ app.post('/sign_in', async (req, res) => {
         await signInUser(user)
         res.send('Usuario creado con éxito')
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(400).send(error.message)
     }
 })
 
@@ -77,17 +77,6 @@ app.get('/profile', verifyToken, async (req, res) => {
     } catch (error) {
         console.error("Error en el endpoint GET /profile:", error);
         res.status(500).json({ message: "Error interno del servidor" });
-    }
-})
-
-//Mostrar peliculas del listado fav. NO ESTA LISTA 
-app.post('/favorites', async(req, res) => {
-    try {
-        const { id } = req.body
-        const fav = await showFavorites(id)
-        res.json(fav)
-    } catch (error) {
-        res.status(500).send(error.message)
     }
 })
 
@@ -130,8 +119,6 @@ app.post('/content_details', async(req, res) => {
         const contentDetails = await getContentDetails(content)
         res.json(contentDetails)
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(400).send(error.message)
     }
 })
-
-//endpoint para modificar.

@@ -12,7 +12,7 @@ const pool = new Pool ({
     allowExitOnIdle: true
 })
 
-const getTopRated = async(media_type, section, page) => {
+const getContent = async(media_type, section, page) => {
     const response = await axios.get(`${APIINFO.urlBase}/${media_type}/${section}?page=${page}&api_key=${APIINFO.key}`)
     return response.data
 }
@@ -27,7 +27,7 @@ const signInUser = async(user) => {
     await pool.query(consulta,values)
 }
 
-//authenticar usuario
+//autenticar usuario
 const logInUser = async (email, password) => {
     const values = [email]
     const consulta = "SELECT * FROM users WHERE email = $1"
@@ -73,21 +73,6 @@ const deleteFromFavorites = async(content) => {
     }
 }
 
-//listar peliculas y series favoritas
-const showFavorites = async(id) => {
-    try {
-        const consulta = "SELECT * FROM movies_and_series_by_user WHERE id_user_liked = $1"
-        const values = [id]
-        const { rows, rowCount } = await pool.query(consulta, values)
-        if (rowCount === 0) {
-            throw { code: 404, message: "Usuario no tiene series favoritas :c" }
-        }
-        return rows;
-    } catch (error) {
-        throw error;
-    }
-}
-
 //buscar peliculas y series
 const searchMoviesAndSeries = async(name,page) => {
     let nameQuery = name.replace(/ /g, "+")
@@ -118,4 +103,4 @@ const editUser = async() => {
 }
 
 
-module.exports = { getTopRated, searchMoviesAndSeries, showFavorites, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, editUser, getContentDetails }
+module.exports = { getContent, searchMoviesAndSeries, saveToFavorites, signInUser, logInUser, userData, deleteFromFavorites, editUser, getContentDetails }
