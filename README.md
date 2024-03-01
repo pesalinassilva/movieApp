@@ -49,6 +49,13 @@ Finalmente, una vez realizadas todas las preparaciones indicadas en los pasos an
 
 Una vez incializado, se debe abrir una nueva terminal pero esta vez para acceder a la raíz de '/frontend' y ejecutar el mismo comando 'npm run dev'.
 
+# Usuario por defecto
+Se agrega un usuario en la base de datos para poder realizar pruebas dentro de la aplicación:
+- user: prueba@prueba.com
+- password: 123456
+
+ó también se puede crear un usuario mediante el SignIn de la aplicación.
+
 Siguiendo estos pasos, la aplicación se desplegará correctamente.
 
 Gracias por tu atención!
