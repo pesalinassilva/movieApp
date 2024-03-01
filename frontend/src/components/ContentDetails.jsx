@@ -1,9 +1,9 @@
 import axios from "axios"
+import { ENDPOINT, URLPOSTER } from "../config/constants"
+import { useEffect, useState } from "react"
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Badge from 'react-bootstrap/Badge'
-import { ENDPOINT, URLPOSTER } from "../config/constants"
-import { useEffect, useState } from "react"
 
 const ContentDetail = ({ show, handleClose, content}) => {
     const [contentDetails, setContentDetails] = useState(null)

@@ -1,10 +1,10 @@
 import axios from "axios"
 import { ENDPOINT, URLPOSTER } from "../config/constants"
 import { useNavigate } from "react-router-dom"
-import MovieContext from "../context/MovieContext"
 import { useContext, useState } from "react"
 import ContentDetail from "./ContentDetails"
 import NotificationAlert from "./NotificationAlert"
+import MovieContext from "../context/MovieContext"
 
 const ContentCard = ( {contentInfo, isFavorite = null} ) => {
     const navigate = useNavigate()

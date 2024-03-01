@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useContext, useState } from 'react'
 import { ENDPOINT } from '../config/constants'
-import MovieContext from "../context/MovieContext"
 import ContentCard from '../components/ContentCard'
 import ReactPaginate from 'react-paginate'
+import MovieContext from "../context/MovieContext"
 
 const SearchResults = () => {
     const { userInfo } = useContext(MovieContext)

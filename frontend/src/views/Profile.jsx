@@ -1,8 +1,8 @@
 import axios from 'axios'
-import MovieContext from '../context/MovieContext.js'
 import { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ENDPOINT } from '../config/constants.js'
+import MovieContext from '../context/MovieContext.js'
 
 const Profile = () => {
     const navigate = useNavigate()

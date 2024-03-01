@@ -9,7 +9,11 @@ const pool = new Pool ({
     user: BBDD.user,
     password: BBDD.password,
     database: BBDD.database,
-    allowExitOnIdle: true
+    port: BBDD.port,
+    allowExitOnIdle: true,
+    ssl: {
+        rejectUnauthorized: false
+    }
 })
 
 const getContent = async(media_type, section, page) => {

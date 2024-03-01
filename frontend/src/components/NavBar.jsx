@@ -1,7 +1,6 @@
-import { useContext } from "react";
-import MovieContext from "../context/MovieContext";
+import { useContext } from "react"
 import { Link, useNavigate } from 'react-router-dom'
-
+import MovieContext from "../context/MovieContext"
 
 const NavBar = () => {
     const navigate = useNavigate()
