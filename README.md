@@ -13,7 +13,7 @@ Con esto, todos las dependencias quedarán correctamente instaladas.
 La aplicación se realizó utilizando PostgreSQL como motor de base de datos. Para poder conectarse a ella existen dos métodos que se detallan a continuación:
 
 ### 2.1 A través de RDS de AWS.
-Este es el método más sencillo y rápido. Solo se debe descargar el archivo .env adjunto en el correo enviado. Este archivo contiene las variables de entorno para conectarse a la base de datos. Lo único que se debe modificar de este archivo es la API_KEY, la cuál debe reemplazar por una key generada en el sitio de la API [The Movie Data Base](https://www.themoviedb.org/). Para esto debe crear una cuenta e ir a los Ajustes de su cuenta para luego ir a la sección de API.
+Este es el método más sencillo y rápido. Se debe crear un archivo .env en la raíz de '/backend' y reemplazar la información por la adjunta en el correo enviado. Este archivo contiene las variables de entorno para conectarse a la base de datos. La API_KEY se debe reemplazar por una key generada en el sitio de la API [The Movie Data Base](https://www.themoviedb.org/). Para esto debe crear una cuenta e ir a los Ajustes de su cuenta para luego ir a la sección de API.
 
 ### 2.2 Configurando PostgreSQL de manera local.
 Para esto se deben seguir las siguientes instrucciones:
