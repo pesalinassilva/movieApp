@@ -37,7 +37,7 @@ const ContentCard = ( {contentInfo, isFavorite = null} ) => {
                 axios.post(ENDPOINT.saveFavorites, payload)
                 .then(() => {
                     setShowAlertMessage(true)
-                    setAlertMessage('Contenido guardado con éxito! 🥳 Ingresa a tu pestaña de favoritos para revisarlo!')
+                    setAlertMessage('Contenido guardado con éxito! 🥳')
                 })
                 .catch(({ response: { data } }) => {
                     console.error(data)

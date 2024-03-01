@@ -32,9 +32,13 @@ const SearchResults = () => {
         window.scrollTo(0, 0)
     }
     
+    const filterContent = (favorites, media_type) => {
+        return (favorites.filter(item => item.media_type === media_type).map(item => item.content_id))
+    }
+
     const favoritesByUser = userInfo ? userInfo.favorites : []
-    const userTvShows = favoritesByUser.filter(item => item.media_type === "tv").map(item => item.content_id)
-    const userMovies = favoritesByUser.filter(item => item.media_type === "movie").map(item => item.content_id)
+    const userTvShows = filterContent(favoritesByUser, 'tv')
+    const userMovies = filterContent(favoritesByUser, 'movie')
 
     return(
         <div>
