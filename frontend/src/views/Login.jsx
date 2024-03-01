@@ -10,8 +10,8 @@ const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 
 const Login = () => {
     const navigate = useNavigate()
-    const [user, setUser] = useState(initialForm)
     const { setUserInfo } = useContext(MovieContext)
+    const [user, setUser] = useState(initialForm)
     const [alertMessage, setAlertMessage] = useState('')
     const [showAlertMessage, setShowAlertMessage] = useState(false)
 
@@ -73,7 +73,7 @@ const Login = () => {
             </div>
             <div className='d-flex justify-content-center mt-3'>
             <button type='submit' className='btn btn-light'>Iniciar Sesión</button>
-                <Link to='/login' className='btn login-btn btn-sm text-secondary'>O Registrate!</Link>
+                <Link to='/signin' className='btn login-btn btn-sm text-secondary'>O Registrate!</Link>
             </div>
         </form>
             <NotificationAlert 

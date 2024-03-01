@@ -47,8 +47,6 @@ const Home = () => {
         )
     }
 
-    console.log(userInfo?.favorites, 'home')
-
     return(
         <div className="container" style={{ backgroundColor: "#210930" }} >
             <h1 className="text-light text-center my-3">Top Rated Movies</h1>
